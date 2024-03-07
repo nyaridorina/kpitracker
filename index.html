@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Countback Counter Test</title>
+</head>
+<body>
+    <h1>Countback Counter Test</h1>
+    <form>
+        <label for="date-input">Enter the date (YYYY-MM-DD HH:MM:SS): </label>
+        <input type="text" id="date-input" name="date-input" required>
+        <button type="button" onclick="calculateCountbackCounter()">Calculate</button>
+    </form>
+
+    <h2>Result:</h2>
+    <p id="result"></p>
+
+    <script>
+        function calculateCountbackCounter() {
+            var inputDate = document.getElementById("date-input").value;
+
+            // Make an AJAX request to the server-side script
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "/calculate_countback_counter", true);
+            xhr.setRequestHeader("Content-Type", "application/json");
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    var result = JSON.parse(xhr.responseText);
+                    document.getElementById("result").innerHTML = "The countback counter is: " + result.counter;
+                }
+            };
+            xhr.send(JSON.stringify({ input_date: inputDate }));
+        }
+    </script>
+</body>
+</html>

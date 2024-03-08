@@ -5,31 +5,32 @@
 </head>
 <body>
     <h1>Countback Counter Test</h1>
-    <form>
+    <form id="countback-form">
         <label for="date-input">Enter the date (YYYY-MM-DD HH:MM:SS): </label>
-        <input type="text" id="date-input" name="date-input" required>
-        <button type="button" onclick="calculateCountbackCounter()">Calculate</button>
+        <input type="text" id="date-input" name="input_date" required>
+        <button type="submit">Calculate</button>
     </form>
 
     <h2>Result:</h2>
     <p id="result"></p>
 
     <script>
-        function calculateCountbackCounter() {
-            var inputDate = document.getElementById("date-input").value;
+        document.getElementById("countback-form").addEventListener("submit", function(event) {
+            event.preventDefault(); // Prevent form submission
 
-            // Make an AJAX request to the server-side script
-            var xhr = new XMLHttpRequest();
-            xhr.open("POST", "/calculate_countback_counter", true);
-            xhr.setRequestHeader("Content-Type", "application/json");
-            xhr.onreadystatechange = function() {
-                if (xhr.readyState === 4 && xhr.status === 200) {
-                    var result = JSON.parse(xhr.responseText);
-                    document.getElementById("result").innerHTML = "The countback counter is: " + result.counter;
-                }
-            };
-            xhr.send(JSON.stringify({ input_date: inputDate }));
-        }
+            var formData = new FormData(this); // Get form data
+            fetch("/calculate_countback_counter", {
+                method: "POST",
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById("result").textContent = "The countback counter is: " + data.counter;
+            })
+            .catch(error => {
+                console.error("Error:", error);
+            });
+        });
     </script>
 </body>
 </html>

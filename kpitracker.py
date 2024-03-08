@@ -11,8 +11,8 @@ def calculate_countback_counter_route():
 
 def calculate_countback_counter(input_date):
     # Define working hours
-    start_time = datetime.strptime("08:00:00", "%H:%M:%S").time()
-    end_time = datetime.strptime("16:30:00", "%H:%M:%S").time()
+start_time = datetime.strptime("2024-03-07 08:00:00", "%Y-%m-%d %H:%M:%S").time()
+end_time = datetime.strptime("2024-03-07 16:30:00", "%Y-%m-%d %H:%M:%S").time()
 
     # Convert input date to datetime object
     input_datetime = datetime.strptime(input_date, "%Y-%m-%d %H:%M:%S")
@@ -35,5 +35,4 @@ def calculate_countback_counter(input_date):
     return counter
 
 if __name__ == "__main__":
-    from waitress import serve
-    serve(app, host='0.0.0.0', port=8000)
+    app.run(debug=True)  # Run the app in debug mode for development

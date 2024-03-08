@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My KPI tracker</title>
+</head>
+<body>
+    <h1>My KPI tracker</h1>
+    <form id="countback-form">
+        <label for="date-input">Enter the date (YYYY-MM-DD HH:MM:SS): </label>
+        <input type="text" id="date-input" name="input_date" required>
+        <button type="submit">Calculate</button>
+    </form>
+
+    <h2>Result:</h2>
+    <p id="result"></p>
+
+    <script>
+        document.getElementById("countback-form").addEventListener("submit", function(event) {
+            event.preventDefault(); // Prevent form submission
+
+            var formData = new FormData(this); // Get form data
+            fetch("/calculate_countback_counter", {
+                method: "POST",
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById("result").textContent = "The countback counter is: " + data.counter;
+            })
+            .catch(error => {
+                console.error("Error:", error);
+            });
+        });
+    </script>
+</body>
+</html>

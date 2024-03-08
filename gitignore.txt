@@ -1,8 +1,17 @@
-# Virtual environment
+# Ignore Python bytecode files
+*.pyc
+
+# Ignore virtual environment
 venv/
 
-# Compiled Python files
+# Ignore environment variables file
+.env
+
+# Ignore IDE or editor files
+.vscode/
+.idea/
+
+# Ignore compiled Python files
 __pycache__/
 
-# Environment variables
-.env
+# Ignore any other files or directories you don't want to include in your repository

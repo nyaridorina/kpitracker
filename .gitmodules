@@ -1,0 +1,3 @@
+[submodule "kpitracker"]
+    path = kpitracker
+    url = https://github.com/nyaridorina/kpitracker

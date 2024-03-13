@@ -32,7 +32,8 @@ def calculate_countback_counter(input_date):
 def calculate_countback_counter_route():
     input_date = request.json["input_date"]
     counter = calculate_countback_counter(input_date)
-    return jsonify({"counter": counter})
+    print("Countback counter:", counter)  # Print the result to the console
+    return jsonify({"counter": counter})  # Optionally return JSON response
 
 if __name__ == "__main__":
     app.run(debug=True)

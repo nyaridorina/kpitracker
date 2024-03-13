@@ -17,4 +17,4 @@ def calculate_difference():
     return render_template('index.html', difference=difference)
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=False)

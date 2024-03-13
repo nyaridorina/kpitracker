@@ -14,17 +14,17 @@ def calculate_countback_counter(input_date):
     # Initialize counter
     counter = 0
 
-    while input_datetime > datetime.now():
+    while datetime.now() > input_datetime:
         # Check if it's a weekday and within working hours
         if input_datetime.weekday() < 5 and start_time <= input_datetime.time() <= end_time:
             counter += 1
         
-        # Decrease one day from the input date
-        input_datetime -= timedelta(days=1)
+        # Increase one day to the input date
+        input_datetime += timedelta(days=1)
 
-        # Set the time to the end of the working day if it falls outside working hours
-        if input_datetime.time() > end_time:
-            input_datetime = input_datetime.replace(hour=end_time.hour, minute=end_time.minute, second=end_time.second)
+        # Set the time to the start of the working day if it falls outside working hours
+        if input_datetime.time() < start_time:
+            input_datetime = input_datetime.replace(hour=start_time.hour, minute=start_time.minute, second=start_time.second)
 
     return counter
 
@@ -32,8 +32,7 @@ def calculate_countback_counter(input_date):
 def calculate_countback_counter_route():
     input_date = request.json["input_date"]
     counter = calculate_countback_counter(input_date)
-    print("Countback counter:", counter)  # Print the result to the console
-    return jsonify({"counter": counter})  # Optionally return JSON response
+    return jsonify({"counter": counter})  # Return JSON response
 
 if __name__ == "__main__":
     app.run(debug=False)  # Debug mode disabled

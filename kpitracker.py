@@ -30,7 +30,7 @@ def calculate_countback_counter(input_date):
 
 @app.route("/calculate_countback_counter", methods=["POST"])
 def calculate_countback_counter_route():
-    input_date = request.json["input_date"]
+    input_date = request.form["input_date"]
     counter = calculate_countback_counter(input_date)
     return jsonify({"counter": counter})  # Return JSON response
 

@@ -36,4 +36,4 @@ def calculate_countback_counter_route():
     return jsonify({"counter": counter})  # Optionally return JSON response
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=False)  # Debug mode disabled

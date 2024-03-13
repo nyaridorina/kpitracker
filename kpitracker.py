@@ -5,8 +5,8 @@ app = Flask(__name__)
 
 def calculate_countback_counter(input_date):
     # Define working hours
-    start_time = datetime.strptime("08:00:00", "%H:%M:%S").time()
-    end_time = datetime.strptime("16:30:00", "%H:%M:%S").time()
+    start_time = datetime.strptime("2024-03-13 08:00:00", "%Y-%m-%d %H:%M:%S").time()
+    end_time = datetime.strptime("2024-03-13 16:30:00", "%Y-%m-%d %H:%M:%S").time()
 
     # Convert input date to datetime object
     input_datetime = datetime.strptime(input_date, "%Y-%m-%d %H:%M:%S")
